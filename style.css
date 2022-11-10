@@ -1,0 +1,106 @@
+*
+{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+
+}
+body{
+    background: url(cricStadium.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+    
+
+}
+
+
+
+
+.navbar{
+    font-size: 21px;
+    display:flex;
+    justify-content: center;
+    margin-top:12px;
+    margin-right:12px;
+
+
+}
+
+a{
+    text-decoration: none;
+
+}
+#criclive{
+    flex-grow: 1;
+
+    margin-left:2rem;
+    align-self: flex-start;
+}
+
+.links{
+    padding: 12px 0px;
+    margin: 0px 10px;
+    color:white;
+}
+
+.links :hover{
+    font-size:67px;
+}
+
+h2 :hover{
+    color:white !important;
+}
+
+
+#auth{
+    display: flex;
+    flex-direction: column;
+    margin-left:8rem;
+    align-items: center;
+    height: 260px;
+    width: 300px;
+    border: 2px solid rgb(37, 95, 57);
+    border-radius: 12px;
+    position: absolute;
+    left: 10rem;
+    top: 13rem;
+
+}
+input{
+    font-size:18px;
+    margin:2px 0px;
+    background-color: transparent;
+    color:white;
+    border-radius: 8px;
+}
+button{
+    font-size: 18px;
+    margin: 9px 2px;
+    background-color: transparent;
+    color:white;
+    border:2px solid white;
+    border-radius: 3px;
+
+}
+#formp{
+    color:white;
+    margin-top: 4px;
+}
+#signup{
+    display: none;
+    color:white;
+   
+
+}
+#form1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#signup p{
+    margin-top:5px;
+}
+#signup input{
+    margin:4px 0px;
+}

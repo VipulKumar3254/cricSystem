@@ -1,0 +1,157 @@
+
+<?php
+
+if(isset($_POST['login'])  ||  isset( $_POST['signup']))
+{
+    
+    $host='localhost';
+    $username='root';
+    $password="";
+    $conn  = new mysqli($host,$username,$password);
+
+    if($conn)
+    {
+
+
+    if( isset($_POST['login']))
+    {   
+        $name =$_POST['name1'];
+        $passw =$_POST['password1'];
+        $conn->query("use cricSystem");
+
+        // $result = $conn->query("select name, password from users");  
+        $result = $conn->query("select name, password from users where name='$name'");  
+       
+        $rows = mysqli_num_rows($result);
+        echo " $rows";
+       
+        if( $rows)
+        {
+            $data = $result->fetch_assoc();
+            echo "<pre>";
+            print_r($data);
+            echo "</pre>";
+          $dbPassword = $data['password'];
+          $logResult = password_verify($passw,$dbPassword);
+            if(  $logResult )
+            {
+                session_start();
+                $_SESSION['name']=$name;
+                $_SESSION['password']=$data['password'];
+                // location.reload(true);
+                 echo " raj2 <br/>"; 
+                header("Location:http://localhost:80/cricSystem/index.php");
+
+
+                
+            }
+            else{
+                 echo " authenticaton credentials failed please try again.. <br/>"; 
+            }
+
+        }
+      else
+      {
+          echo " authenticaton credentials failed please try again.. <br/>"; 
+      }
+
+    }
+
+
+
+
+    if( isset( $_POST['signup']))
+    {
+        $name =$_POST['name'];
+        $passw =$_POST['password'];
+         echo " $name <br/>"; 
+         echo " $passw <br/>"; 
+        
+
+        if( $name ==" "|| $passw ==" ")
+        {
+            echo " please fill name and password to signup";
+        }
+        else
+        {
+
+
+         $encryptedPassword= password_hash($passw,PASSWORD_DEFAULT);
+         $conn->query(" use cricSystem");
+
+        $result = $conn->query("insert into users values  ( '$name' , '$encryptedPassword' )  ");
+         if($result)
+         {
+            echo " <h1> please login with username and passwod</h1>";
+         }
+         else{
+             echo "<h1> server is busy please try again after some time </h1>";
+         }
+
+
+
+        }
+        
+
+    }
+
+}
+else{
+    echo " connection cant be established..";
+}
+
+    
+
+}
+
+else
+{
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+code of form of login and signup
+
+
+
+
+
+        
+            <form action="<?php $_SERVER['PHP_SELF']?>" method="POST" id='auth'>
+                <label id='formp' >enter details for login</label>
+                <input type="text" name="name1" id="name1" placeholder='enter name'>
+                <input type="password" name='password1' id='password1' placeholder='enter password'>
+                <div>
+
+                    <input type="submit" name='login' value="login">
+                    <input type="button" onclick='signup()'  value='Click to signup'>
+                </div>
+
+
+             </form>
+
+        
+        <div id='signup'>
+
+            <form action=" <?php  $_SERVER['PHP_SELF']; ?>" id='form1' method='POST' >
+                <p>enter details for sign up</p>
+                <input type="text" name="name" id="name"  placeholder="enter name">
+                <input type="password" name="password"  placeholder="enter password" id="password">
+                <br>
+                <div>
+
+                    <input type="submit" value="Sign-up" id="signupButton"   name='signup' >
+                    <input type="button" value='login' onclick='login()'>
+                </div>
+
+            </form>
+        </div>
